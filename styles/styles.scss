@@ -5,16 +5,18 @@
     font-family: 'Roboto', sans-serif;
 
 }
-
 body{
+    border: 1px solid red;
+}
+#container{
     background: linear-gradient(#a3bded, #6991c7);
     background-repeat: no-repeat;
     height: 100vh;
-    width: 100vw;
     display: flex;
     flex-direction:column;
     align-items: center;
     justify-content: center;
+    border: 1px solid blue;
 
     button{
         cursor: pointer;
@@ -29,6 +31,14 @@ body{
         justify-content: space-between;
         margin-bottom: 3%;
     }
-
 }
 
+@media screen and (max-width: 700px){
+    #inputs{
+        flex-direction: column;
+        
+    input{
+        width: 100%;
+    }
+    }
+}
