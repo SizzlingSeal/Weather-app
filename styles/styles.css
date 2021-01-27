@@ -7,11 +7,14 @@
 }
 
 body {
+  border: 1px solid red;
+}
+
+#container {
   background: -webkit-gradient(linear, left top, left bottom, from(#a3bded), to(#6991c7));
   background: linear-gradient(#a3bded, #6991c7);
   background-repeat: no-repeat;
   height: 100vh;
-  width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -25,17 +28,18 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  border: 1px solid blue;
 }
 
-body button {
+#container button {
   cursor: pointer;
 }
 
-body label {
+#container label {
   font-size: 1.1em;
 }
 
-body #inputs {
+#container #inputs {
   width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -44,5 +48,17 @@ body #inputs {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-bottom: 3%;
+}
+
+@media screen and (max-width: 700px) {
+  #inputs {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #inputs input {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=styles.css.map */
