@@ -1,4 +1,4 @@
-fetch("./node_modules/all-countries-and-cities-json/countries.json")
+fetch("./countries.json")
 .then((resp) => resp.json())
 .then((json) => {
     console.log((json));
