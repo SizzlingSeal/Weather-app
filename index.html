@@ -11,15 +11,25 @@
 <body>
 <div id="container">
     <div id="inputs">
-    <label>Enter your country:
+     
+    <label>Enter your Country:
         <input list="countries"  id="countries-input" onfocus="this.value=''"/></label>
         <datalist id="countries">
         </datalist>
-        <br>
+    
+    
         <label>Enter your City:
             <input list="cities" id="cities-input" onfocus="this.value=''" disabled= true/></label>
             <datalist id="cities">
             </datalist>
+     
+
+        <div><label>Unit:<br>
+            <input type="radio" id="fahrenheit" name="unit" value="fahrenheit" checked=true>
+            <label for="fahrenheit">Fahrenheit</label><br>
+            <input type="radio" id="celsius" name="unit" value="celsius">
+            <label for="Celsius">Celsius</label><br>
+        </label></div>
             <button onclick="getWeather()">Check Weather</button>
         </div>
         <div id="openweathermap-widget-11"></div>
