@@ -10,16 +10,21 @@ document.getElementById("countries-input").addEventListener("change", () => {
     //inserting cities in the input
     document.getElementById("cities").innerHTML = "";
     document.getElementById("cities-input").disabled = false;
+
     var input = document.getElementById("countries-input").value;
     var city = countriesList[input];
+
     for(var i = 0 ;i < city.length; i++){
         var node = document.createElement("option");
         node.setAttribute("value", `${city[i]}`);
         document.getElementById("cities").appendChild(node);
     }
+
     getIso();
+
     }catch (e){
     console.log("No Country Input");
+    console.log(e);
 }
 });
 
@@ -28,11 +33,29 @@ document.getElementById("countries-input").addEventListener("change", () => {
 });
 
 async function getWeather(){
+
+    document.getElementById("openweathermap-widget-11").innerHTML ="";
+    document.getElementById("openweathermap-widget-15").innerHTML ="";
+
     try{
+
     cityName = document.getElementById("cities-input").value;
     const resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${apiKey}`);
     var weatherAPI = await resp.json();
     var cityID = weatherAPI.id;
+    var unit, container;
+
+    if(document.getElementById('fahrenheit').checked) { //check what unit to use
+        unit = 'imperial';
+      }else{
+        unit = 'metric';
+      }
+
+      if(screen.width <= 700){ //widget will change depending on the screen size
+        container = 15;
+      }else{
+        container = 11;
+      }
 
     //openweathermap API widget
     if(weatherAPI.cod == "404"){
@@ -40,42 +63,28 @@ async function getWeather(){
     }else{
         var script = document.createElement('script');
         var s = document.getElementsByTagName('script')[0];
+
         script.async = true;
         script.charset = "utf-8";
         script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
-    //two different weather widgets depending on the screen size
-    if(screen.width <= 700){ //widget id 15
-        document.getElementById("openweathermap-widget-15").innerHTML ="";
-    window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
-    window.myWidgetParam.push({
-          id: 15,
+    
+        window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
+        window.myWidgetParam.push({
+          id: container,
           cityid: cityID,
-          appid: 'dfdbfa904539422f381617199f857fac',
-          units: 'imperial',
-          containerid: 'openweathermap-widget-15',  
+          appid: apiKey,
+          units: unit,
+          containerid: `openweathermap-widget-${container}`,  
         });
-    (function(){
-        s.parentNode.insertBefore(script, s);  
-    })();
-    }
-    else{//widget id 11
-    document.getElementById("openweathermap-widget-11").innerHTML ="";
-    window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
-    window.myWidgetParam.push({
-          id: 11,
-          cityid: cityID,
-          appid: 'dfdbfa904539422f381617199f857fac',
-          units: 'imperial',
-          containerid: 'openweathermap-widget-11',  
-        });
-    (function(){
-        s.parentNode.insertBefore(script, s);  
-    })();
-    }
+
+        (function(){
+            s.parentNode.insertBefore(script, s);  
+        })();
     }
     }catch (e){
     document.getElementById("openweathermap-widget-11").innerHTML ="";
     document.getElementById("openweathermap-widget-15").innerHTML ="";
+    console.log(e);
     }
 }
 
