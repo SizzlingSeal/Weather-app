@@ -48,7 +48,7 @@ document.getElementById("countries-input").addEventListener("focusin", () =>{
 async function getWeather(){
     try{
     cityName = document.getElementById("cities-input").value;
-    const resp = await fetch(`https://sizzlingseal.github.io/api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${apiKey}`);
+    const resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${apiKey}`);
     var weatherAPI = await resp.json();
     console.log(weatherAPI);
     var cityID = weatherAPI.id;
