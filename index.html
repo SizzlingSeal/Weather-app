@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/styles.css">
     <title>Weather App</title>
 </head>
 <body>
+    <div id="inputs">
     <label>Enter your country:
         <input list="countries"  id="countries-input" onfocus="this.value=''"/></label>
         <datalist id="countries">
         </datalist>
         <br>
         <label>Enter your City:
-            <input list="cities" id="cities-input" onfocus="this.value=''"/></label>
+            <input list="cities" id="cities-input" onfocus="this.value=''" disabled= true/></label>
             <datalist id="cities">
             </datalist>
+
+            <button onclick="getWeather()">Check Weather</button>
+        </div>
             <div id="openweathermap-widget-11"></div>
 <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
 <script src="javascript.js"></script>
