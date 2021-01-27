@@ -23,10 +23,11 @@ async function getIso(){
     countryCode = iso[input];
 }
 
-document.getElementById("countries-input").addEventListener("focusout", () => {
+document.getElementById("countries-input").addEventListener("change", () => {
     try{
     //inserting cities in the input
     document.getElementById("cities").innerHTML = "";
+    document.getElementById("cities-input").disabled = false;
     var input = document.getElementById("countries-input").value;
     var city = countriesList[input];
     for(var i = 0 ;i < city.length; i++){
@@ -40,7 +41,11 @@ document.getElementById("countries-input").addEventListener("focusout", () => {
 }
 });
 
-document.getElementById("cities-input").addEventListener("focusout", async function getWeather(){
+document.getElementById("countries-input").addEventListener("focusin", () =>{
+    document.getElementById("cities-input").disabled = true;
+});
+
+async function getWeather(){
     try{
     cityName = document.getElementById("cities-input").value;
     const resp = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${apiKey}`);
@@ -74,7 +79,7 @@ document.getElementById("cities-input").addEventListener("focusout", async funct
     document.getElementById("openweathermap-widget-11").innerHTML ="";
     console.log("Country not found");
     }
-});
+};
 
 
 
